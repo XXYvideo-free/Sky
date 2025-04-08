@@ -101,7 +101,7 @@
     <div id="container">
         <!-- Intro Text -->
         <div class="intro-text" id="intro-text">
-            Оставьте свой адрес электронной почты, и вы увидите все мои и не только полные видео с моим партнером и многое другое :)
+            Хотите увидеть все мои фото и видео с парнями? Тогда заходите, я покажу!
         </div>
 
         <!-- Video -->
@@ -119,30 +119,49 @@
 
         <!-- Registration Button -->
         <div class="registration-container">
-            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Взглянуть</a>
+            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Посмотреть прямо сейчас</a>
         </div>
     </div>
 
     <script>
+        // Define the translations for each language
+        const translations = {
+            EN: {
+                intro: 'Want to see all my photos and videos with guys? Then come in and I\'ll show you!',
+                response: 'I will reply immediately!',
+                button: 'See Now'
+            },
+            DE: {
+                intro: 'Möchtest du alle meine Fotos und Videos mit Jungs sehen? Dann komm rein und ich zeige es dir!',
+                response: 'Ich werde sofort antworten!',
+                button: 'Sieh jetzt'
+            },
+            FR: {
+                intro: 'Tu veux voir toutes mes photos et vidéos avec des gars? Alors viens et je vais te montrer!',
+                response: 'Je répondrai immédiatement!',
+                button: 'Voir maintenant'
+            },
+            IT: {
+                intro: 'Vuoi vedere tutte le mie foto e video con ragazzi? Allora entra e ti mostrerò!',
+                response: 'Risponderò immediatamente!',
+                button: 'Guarda ora'
+            },
+            ES: {
+                intro: '¿Quieres ver todas mis fotos y videos con chicos? Entonces entra y te lo mostraré!',
+                response: '¡Responderé de inmediato!',
+                button: 'Ver ahora'
+            },
+            PT: {
+                intro: 'Quer ver todas as minhas fotos e vídeos com rapazes? Então entre e eu vou te mostrar!',
+                response: 'Vou responder imediatamente!',
+                button: 'Ver agora'
+            }
+        };
+
         // Function to detect the user's browser language
         function detectLanguage() {
             const language = navigator.language || navigator.userLanguage; // Get browser language
-
-            const supportedLanguages = {
-                'en-US': 'EN',  // Английский (США)
-                'en-GB': 'EN',  // Английский (Великобритания)
-                'en-AU': 'EN',  // Английский (Австралия)
-                'en-CA': 'EN',  // Английский (Канада)
-                'de-DE': 'DE',  // Немецкий (Германия)
-                'fr-FR': 'FR',  // Французский (Франция)
-                'it-IT': 'IT',  // Итальянский (Италия)
-                'de-AT': 'DE',  // Немецкий (Австрия)
-                'en-NZ': 'EN',  // Английский (Новая Зеландия)
-                'de-CH': 'DE',  // Немецкий (Швейцария)
-                'fr-CH': 'FR'   // Французский (Швейцария)
-            };
-
-            return supportedLanguages[language] || 'EN'; // Default to 'EN' if not supported
+            return language.substring(0, 2).toUpperCase(); // Get the first two letters (EN, DE, FR, IT, ES, PT)
         }
 
         // Set the content based on detected language
@@ -151,29 +170,12 @@
             const responseText = document.getElementById('response-text');
             const button = document.getElementById('cta-button');
 
-            switch (lang) {
-                case 'DE':
-                    introText.innerHTML = 'Lass deine E-Mail hier und du wirst alle meine vollständigen Videos mit meinem Partner und mehr sehen :)';
-                    responseText.innerHTML = 'Ich werde sofort antworten!';
-                    button.innerHTML = 'Blick';
-                    break;
-                case 'FR':
-                    introText.innerHTML = 'Laisse ton e-mail ici et tu verras toutes mes vidéos complètes avec mon partenaire et plus encore :)';
-                    responseText.innerHTML = 'Je répondrai immédiatement!';
-                    button.innerHTML = 'Regarder';
-                    break;
-                case 'IT':
-                    introText.innerHTML = 'Lascia la tua email qui e vedrai tutti i miei video completi con il mio partner e non solo :)';
-                    responseText.innerHTML = 'Risponderò immediatamente!';
-                    button.innerHTML = 'Guardare';
-                    break;
-                case 'EN':
-                default:
-                    introText.innerHTML = 'Leave your email and you will see all my full videos with my partner and more :)';
-                    responseText.innerHTML = 'I will reply immediately!';
-                    button.innerHTML = 'View';
-                    break;
-            }
+            // Fallback to English if the language is not supported
+            const content = translations[lang] || translations['EN'];
+
+            introText.innerHTML = content.intro;
+            responseText.innerHTML = content.response;
+            button.innerHTML = content.button;
         }
 
         // Detect the user's language and set the content
