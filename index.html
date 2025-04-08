@@ -102,8 +102,8 @@
 
         /* Style for popup */
         #popup {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
+            background-color: #444; /* Grey background */
+            color: #fff; /* White text color */
             padding: 20px;
             font-size: 18px;
             border-radius: 8px;
@@ -114,14 +114,72 @@
             transform: translate(-50%, -50%);
             display: none;
             z-index: 10;
+            text-align: center; /* Ensure text is centered */
+        }
+
+        /* Language selector container */
+        #language-selector {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000; /* Original black background */
+            padding: 12px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            width: 250px;
+            z-index: 2;
+            border: 1px solid #ff4500;
+        }
+
+        #language-selector select {
+            background-color: white; /* White background for the dropdown */
+            color: #000; /* Black text for visibility */
+            border: 1px solid #ff4500; /* Border to match with the theme */
+            font-size: 16px;
+            padding: 8px;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        /* Adjust dropdown for smaller screens */
+        @media screen and (max-width: 768px) {
+            #language-selector {
+                width: 90%;
+                padding: 15px;
+            }
+            #language-selector select {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+
+        /* Popup Text inside widget */
+        #language-selector select {
+            color: #000; /* Ensures text is readable in the dropdown */
         }
     </style>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div id="language-selector">
+        <select id="language-dropdown">
+            <option value="en">English</option>
+            <option value="de-DE">Germany (DE)</option>
+            <option value="fr-FR">France (FR)</option>
+            <option value="it-IT">Italy (IT)</option>
+            <option value="de-AT">Austria (AT)</option>
+            <option value="de-CH">Switzerland (CH)</option>
+        </select>
+    </div>
+
     <div id="container">
         <!-- Intro Text -->
         <div class="intro-text" id="intro-text">
-            Для просмотра полного видео просто введи любой e-mail.
+            To view the full video, simply enter any email.
         </div>
 
         <!-- Image -->
@@ -131,98 +189,14 @@
 
         <!-- Registration Button -->
         <div class="registration-container" id="registration-container">
-            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Ввести</a>
+            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Enter</a>
         </div>
 
         <!-- Popup -->
-        <div id="popup">После перехода дождитесь поля ввода...</div>
+        <div id="popup">After the transition, please wait for the input field...</div>
     </div>
 
     <script>
-        // Define the translations for each language and country
-        const translations = {
-            EN: {
-                intro: 'To view the full video, simply enter any email.',
-                button: 'Enter',
-                popup: 'After the transition, please wait for the input field...'
-            },
-            AU: {
-                intro: 'To view the full video, simply enter any email.',
-                button: 'Enter',
-                popup: 'After the transition, please wait for the input field...'
-            },
-            AT: {
-                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
-                button: 'Eingeben',
-                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
-            },
-            CA: {
-                intro: 'Pour voir la vidéo complète, il suffit d\'entrer n\'importe quel e-mail.',
-                button: 'Entrer',
-                popup: 'Après la transition, veuillez attendre le champ de saisie...'
-            },
-            FR: {
-                intro: 'Pour voir la vidéo complète, il suffit d\'entrer n\'importe quel e-mail.',
-                button: 'Entrer',
-                popup: 'Après la transition, veuillez attendre le champ de saisie...'
-            },
-            DE: {
-                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
-                button: 'Eingeben',
-                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
-            },
-            IT: {
-                intro: 'Per vedere il video completo, inserisci semplicemente una qualsiasi email.',
-                button: 'Inserire',
-                popup: 'Dopo la transizione, attendi il campo di input...'
-            },
-            NZ: {
-                intro: 'To view the full video, simply enter any email.',
-                button: 'Enter',
-                popup: 'After the transition, please wait for the input field...'
-            },
-            CH: {
-                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
-                button: 'Eingeben',
-                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
-            },
-            GB: {
-                intro: 'To view the full video, simply enter any email.',
-                button: 'Enter',
-                popup: 'After the transition, please wait for the input field...'
-            },
-            US: {
-                intro: 'To view the full video, simply enter any email.',
-                button: 'Enter',
-                popup: 'After the transition, please wait for the input field...'
-            }
-        };
-
-        // Function to detect the user's browser language
-        function detectLanguage() {
-            const language = navigator.language || navigator.userLanguage; // Get browser language
-            const country = language.substring(0, 2).toUpperCase(); // Get the first two letters (EN, DE, FR, IT, etc.)
-            return country; 
-        }
-
-        // Set the content based on detected language
-        function setContentBasedOnLanguage(lang) {
-            const introText = document.getElementById('intro-text');
-            const button = document.getElementById('cta-button');
-            const popup = document.getElementById('popup');
-
-            // Fallback to English if the language is not supported
-            const content = translations[lang] || translations['EN'];
-
-            introText.innerHTML = content.intro;
-            button.innerHTML = content.button;
-            popup.innerHTML = content.popup;
-        }
-
-        // Detect the user's language and set the content
-        const userLang = detectLanguage();
-        setContentBasedOnLanguage(userLang);
-
         // Function to show the content after clicking the image
         document.getElementById('clickable-image').addEventListener('click', function() {
             // Show the intro text and button
@@ -242,6 +216,43 @@
                 document.getElementById('popup').style.display = 'none'; // Hide popup
                 window.location.href = "https://offers.affimelody.com/click?pid=3749&offer_id=197"; // Redirect after 6 seconds
             }, 6000); // 6 seconds delay before redirect
+        });
+
+        // Event listener for the language dropdown
+        document.getElementById('language-dropdown').addEventListener('change', function() {
+            var selectedLang = this.value;
+
+            // Set content based on selected language
+            if (selectedLang === 'en') {
+                document.getElementById('intro-text').innerHTML = 'To view the full video, simply enter any email.';
+                document.getElementById('cta-button').innerHTML = 'Enter';
+                document.getElementById('popup').innerHTML = 'After the transition, please wait for the input field...';
+            }
+            else if (selectedLang === 'de-DE') {
+                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('cta-button').innerHTML = 'Eingeben';
+                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+            }
+            else if (selectedLang === 'fr-FR') {
+                document.getElementById('intro-text').innerHTML = 'Pour voir la vidéo complète, entrez simplement un e-mail.';
+                document.getElementById('cta-button').innerHTML = 'Entrer';
+                document.getElementById('popup').innerHTML = 'Après la transition, veuillez attendre le champ de saisie...';
+            }
+            else if (selectedLang === 'it-IT') {
+                document.getElementById('intro-text').innerHTML = 'Per vedere il video completo, inserisci semplicemente una email.';
+                document.getElementById('cta-button').innerHTML = 'Entra';
+                document.getElementById('popup').innerHTML = 'Dopo il passaggio, attendi il campo di input...';
+            }
+            else if (selectedLang === 'de-AT') {
+                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('cta-button').innerHTML = 'Eingeben';
+                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+            }
+            else if (selectedLang === 'de-CH') {
+                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('cta-button').innerHTML = 'Eingeben';
+                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+            }
         });
     </script>
 </body>
