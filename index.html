@@ -26,7 +26,7 @@
         /* Container for the content */
         #container {
             width: 90%;
-            max-width: 800px; /* Increased max width */
+            max-width: 800px;
             background: #000;
             padding: 20px;
             border-radius: 12px;
@@ -39,25 +39,12 @@
             position: relative;
             z-index: 1;
             margin-top: 40px;
-        }
-
-        .video-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .video-container video {
-            width: 100%;
             height: auto;
-            max-height: 500px; /* Increased video height */
-            border-radius: 8px;
-            object-fit: contain;
         }
 
+        /* Text at the top of the container */
         .intro-text {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: bold;
             color: #ff4500;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
@@ -65,16 +52,33 @@
             font-family: 'Helvetica Neue', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: none; /* Hidden by default */
+            text-align: center;
+            width: 100%;
         }
 
-        .response-text {
-            font-size: 16px;
-            color: #ff6347;
-            margin-top: 20px;
+        /* Image container */
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
+        .image-container img {
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            border-radius: 8px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        /* Registration Button */
         .registration-container {
             text-align: center;
+            display: none;
+            margin-top: 20px;
         }
 
         #cta-button {
@@ -95,112 +99,149 @@
             transform: scale(1.05);
             box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
         }
+
+        /* Style for popup */
+        #popup {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.8);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <div id="container">
         <!-- Intro Text -->
         <div class="intro-text" id="intro-text">
-            Хотите увидеть все мои фото и видео с парнями? Тогда заходите, я покажу!
+            Для просмотра полного видео просто введи любой e-mail.
         </div>
 
-        <!-- Video -->
-        <div class="video-container">
-            <video id="video" muted>
-                <source src="woman.mp4" type="video/mp4">
-                Ваш браузер не поддерживает элемент видео.
-            </video>
-        </div>
-
-        <!-- Response Text -->
-        <div class="response-text" id="response-text">
-            Я сразу отвечу!
+        <!-- Image -->
+        <div class="image-container" id="image-container">
+            <img src="ai_bot.png" alt="AI Bot" id="clickable-image">
         </div>
 
         <!-- Registration Button -->
-        <div class="registration-container">
-            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Посмотреть прямо сейчас</a>
+        <div class="registration-container" id="registration-container">
+            <a href="https://offers.affimelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">Ввести</a>
         </div>
+
+        <!-- Popup -->
+        <div id="popup">После перехода дождитесь поля ввода...</div>
     </div>
 
     <script>
-        // Define the translations for each language
+        // Define the translations for each language and country
         const translations = {
             EN: {
-                intro: 'Want to see all my photos and videos with guys? Then come in and I\'ll show you!',
-                response: 'I will reply immediately!',
-                button: 'See Now'
+                intro: 'To view the full video, simply enter any email.',
+                button: 'Enter',
+                popup: 'After the transition, please wait for the input field...'
             },
-            DE: {
-                intro: 'Möchtest du alle meine Fotos und Videos mit Jungs sehen? Dann komm rein und ich zeige es dir!',
-                response: 'Ich werde sofort antworten!',
-                button: 'Sieh jetzt'
+            AU: {
+                intro: 'To view the full video, simply enter any email.',
+                button: 'Enter',
+                popup: 'After the transition, please wait for the input field...'
+            },
+            AT: {
+                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
+                button: 'Eingeben',
+                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
+            },
+            CA: {
+                intro: 'Pour voir la vidéo complète, il suffit d\'entrer n\'importe quel e-mail.',
+                button: 'Entrer',
+                popup: 'Après la transition, veuillez attendre le champ de saisie...'
             },
             FR: {
-                intro: 'Tu veux voir toutes mes photos et vidéos avec des gars? Alors viens et je vais te montrer!',
-                response: 'Je répondrai immédiatement!',
-                button: 'Voir maintenant'
+                intro: 'Pour voir la vidéo complète, il suffit d\'entrer n\'importe quel e-mail.',
+                button: 'Entrer',
+                popup: 'Après la transition, veuillez attendre le champ de saisie...'
+            },
+            DE: {
+                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
+                button: 'Eingeben',
+                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
             },
             IT: {
-                intro: 'Vuoi vedere tutte le mie foto e video con ragazzi? Allora entra e ti mostrerò!',
-                response: 'Risponderò immediatamente!',
-                button: 'Guarda ora'
+                intro: 'Per vedere il video completo, inserisci semplicemente una qualsiasi email.',
+                button: 'Inserire',
+                popup: 'Dopo la transizione, attendi il campo di input...'
             },
-            ES: {
-                intro: '¿Quieres ver todas mis fotos y videos con chicos? Entonces entra y te lo mostraré!',
-                response: '¡Responderé de inmediato!',
-                button: 'Ver ahora'
+            NZ: {
+                intro: 'To view the full video, simply enter any email.',
+                button: 'Enter',
+                popup: 'After the transition, please wait for the input field...'
             },
-            PT: {
-                intro: 'Quer ver todas as minhas fotos e vídeos com rapazes? Então entre e eu vou te mostrar!',
-                response: 'Vou responder imediatamente!',
-                button: 'Ver agora'
+            CH: {
+                intro: 'Um das vollständige Video anzusehen, gib einfach eine beliebige E-Mail ein.',
+                button: 'Eingeben',
+                popup: 'Nach dem Übergang bitte auf das Eingabefeld warten...'
+            },
+            GB: {
+                intro: 'To view the full video, simply enter any email.',
+                button: 'Enter',
+                popup: 'After the transition, please wait for the input field...'
+            },
+            US: {
+                intro: 'To view the full video, simply enter any email.',
+                button: 'Enter',
+                popup: 'After the transition, please wait for the input field...'
             }
         };
 
         // Function to detect the user's browser language
         function detectLanguage() {
             const language = navigator.language || navigator.userLanguage; // Get browser language
-            return language.substring(0, 2).toUpperCase(); // Get the first two letters (EN, DE, FR, IT, ES, PT)
+            const country = language.substring(0, 2).toUpperCase(); // Get the first two letters (EN, DE, FR, IT, etc.)
+            return country; 
         }
 
         // Set the content based on detected language
         function setContentBasedOnLanguage(lang) {
             const introText = document.getElementById('intro-text');
-            const responseText = document.getElementById('response-text');
             const button = document.getElementById('cta-button');
+            const popup = document.getElementById('popup');
 
             // Fallback to English if the language is not supported
             const content = translations[lang] || translations['EN'];
 
             introText.innerHTML = content.intro;
-            responseText.innerHTML = content.response;
             button.innerHTML = content.button;
+            popup.innerHTML = content.popup;
         }
 
         // Detect the user's language and set the content
         const userLang = detectLanguage();
         setContentBasedOnLanguage(userLang);
 
-        // Function to handle video play behavior
-        const video = document.getElementById('video');
-        let videoPlayed = false;
-
-        // Play the video automatically when the page loads (only once)
-        window.addEventListener('load', function() {
-            video.play();
-            videoPlayed = true;
+        // Function to show the content after clicking the image
+        document.getElementById('clickable-image').addEventListener('click', function() {
+            // Show the intro text and button
+            document.getElementById('intro-text').style.display = 'block';
+            document.getElementById('registration-container').style.display = 'block'; // Show button
         });
 
-        // Add event listener to play or pause video when clicked
-        video.addEventListener('click', function() {
-            if (videoPlayed) {
-                if (video.paused) {
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            }
+        // Function to show the popup when clicking the button
+        document.getElementById('cta-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link action
+
+            // Show popup
+            document.getElementById('popup').style.display = 'block';
+
+            // Hide the popup after 6 seconds and proceed with the link
+            setTimeout(function() {
+                document.getElementById('popup').style.display = 'none'; // Hide popup
+                window.location.href = "https://offers.affimelody.com/click?pid=3749&offer_id=197"; // Redirect after 6 seconds
+            }, 6000); // 6 seconds delay before redirect
         });
     </script>
 </body>
