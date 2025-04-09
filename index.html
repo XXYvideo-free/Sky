@@ -173,13 +173,14 @@
             <option value="it-IT">Italy (IT)</option>
             <option value="de-AT">Austria (AT)</option>
             <option value="de-CH">Switzerland (CH)</option>
+            <option value="ru-RU">Russia (RU)</option>
         </select>
     </div>
 
     <div id="container">
         <!-- Intro Text -->
         <div class="intro-text" id="intro-text">
-            To view the full video, simply enter any email.
+            The full video will start automatically, simply answer the girl's request.
         </div>
 
         <!-- Image -->
@@ -193,7 +194,7 @@
         </div>
 
         <!-- Popup -->
-        <div id="popup">After the transition, please wait for the input field...</div>
+        <div id="popup">You can enter fake information.</div>
     </div>
 
     <script>
@@ -224,34 +225,39 @@
 
             // Set content based on selected language
             if (selectedLang === 'en') {
-                document.getElementById('intro-text').innerHTML = 'To view the full video, simply enter any email.';
+                document.getElementById('intro-text').innerHTML = 'The full video will start automatically, simply answer the girl\'s request.';
                 document.getElementById('cta-button').innerHTML = 'Enter';
-                document.getElementById('popup').innerHTML = 'After the transition, please wait for the input field...';
+                document.getElementById('popup').innerHTML = 'You can enter fake information.';
             }
             else if (selectedLang === 'de-DE') {
-                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('intro-text').innerHTML = 'Das vollständige Video wird automatisch gestartet. Beantworte einfach die Bitte des Mädchens.';
                 document.getElementById('cta-button').innerHTML = 'Eingeben';
-                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
             }
             else if (selectedLang === 'fr-FR') {
-                document.getElementById('intro-text').innerHTML = 'Pour voir la vidéo complète, entrez simplement un e-mail.';
+                document.getElementById('intro-text').innerHTML = 'La vidéo complète démarrera automatiquement, il vous suffit de répondre à la demande de la fille.';
                 document.getElementById('cta-button').innerHTML = 'Entrer';
-                document.getElementById('popup').innerHTML = 'Après la transition, veuillez attendre le champ de saisie...';
+                document.getElementById('popup').innerHTML = 'Vous pouvez entrer des informations fausses.';
             }
             else if (selectedLang === 'it-IT') {
-                document.getElementById('intro-text').innerHTML = 'Per vedere il video completo, inserisci semplicemente una email.';
+                document.getElementById('intro-text').innerHTML = 'Il video completo partirà automaticamente, basta rispondere alla richiesta della ragazza.';
                 document.getElementById('cta-button').innerHTML = 'Entra';
-                document.getElementById('popup').innerHTML = 'Dopo il passaggio, attendi il campo di input...';
+                document.getElementById('popup').innerHTML = 'Puoi inserire informazioni false.';
             }
             else if (selectedLang === 'de-AT') {
-                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('intro-text').innerHTML = 'Das vollständige Video wird automatisch gestartet. Beantworte einfach die Bitte des Mädchens.';
                 document.getElementById('cta-button').innerHTML = 'Eingeben';
-                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
             }
             else if (selectedLang === 'de-CH') {
-                document.getElementById('intro-text').innerHTML = 'Um das vollständige Video zu sehen, geben Sie einfach eine E-Mail-Adresse ein.';
+                document.getElementById('intro-text').innerHTML = 'Das vollständige Video wird automatisch gestartet. Beantworte einfach die Bitte des Mädchens.';
                 document.getElementById('cta-button').innerHTML = 'Eingeben';
-                document.getElementById('popup').innerHTML = 'Warten Sie nach dem Übergang auf das Eingabefeld...';
+                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
+            }
+            else if (selectedLang === 'ru-RU') {
+                document.getElementById('intro-text').innerHTML = 'Полное видео начнется автоматически, просто ответь на просьбу девушки.';
+                document.getElementById('cta-button').innerHTML = 'Войти';
+                document.getElementById('popup').innerHTML = 'Вы можете ввести выдуманную информацию.';
             }
         });
     </script>
