@@ -234,7 +234,7 @@
 
         <!-- Steps -->
         <div class="steps">
-            <p><span class="number">1.</span> Paste the generated email</p>
+            <p><span class="number">1.</span> Paste the received email</p>
             <p><span class="number">2.</span> Enter any password</p>
         </div>
 
@@ -243,9 +243,9 @@
             <img src="ai_botlend.png" alt="AI Bot End" />
         </div>
 
-        <!-- Message if password isn't generated -->
+        <!-- Message if email isn't received -->
         <div id="message" class="message">
-            <p>Please generate and copy the email first!</p>
+            <p>Please get and copy the email first!</p>
         </div>
 
         <!-- Call to Action Button -->
@@ -263,7 +263,7 @@
 
     <!-- Scripts -->
     <script>
-        let emailGenerated = false;  // Track if email is generated
+        let emailGenerated = false;  // Track if email is received
 
         function generatePassword() {
             const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -275,8 +275,8 @@
             }
             const email = username + "@gmail.com";
             document.getElementById('password').value = email;
-            emailGenerated = true;  // Set flag to true after generation
-            document.getElementById('message').style.display = 'none'; // Hide message when email is generated
+            emailGenerated = true;  // Set flag to true after receiving email
+            document.getElementById('message').style.display = 'none'; // Hide message when email is received
         }
 
         function copyPassword() {
