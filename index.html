@@ -71,15 +71,6 @@
             font-weight: bold;
         }
 
-        .redirect-text {
-            font-size: 18px;
-            color: transparent;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            -webkit-background-clip: text;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
         .steps {
             margin: 20px 0;
             font-size: 16px;
@@ -160,6 +151,15 @@
             margin-top: 10px;
         }
 
+        .message {
+            display: none;
+            color: red; /* Red color */
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+            text-transform: uppercase; /* Uppercase text */
+        }
+
         .image-container img {
             max-width: 100%;
             height: auto;
@@ -232,9 +232,6 @@
         <div class="info-text">Unlock access to the XVideos section in just 2 simple steps — it's quick!</div>
         <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
 
-        <!-- New Redirect Text -->
-        <div class="redirect-text">YOU WILL BE AUTOMATICALLY REDIRECTED</div>
-
         <!-- Steps -->
         <div class="steps">
             <p><span class="number">1.</span> Paste the generated email</p>
@@ -246,7 +243,12 @@
             <img src="ai_botlend.png" alt="AI Bot End" />
         </div>
 
-        <!-- Call to Action Button moved to the bottom -->
+        <!-- Message if password isn't generated -->
+        <div id="message" class="message">
+            <p>Please generate and copy the email first!</p>
+        </div>
+
+        <!-- Call to Action Button -->
         <a href="https://prev.affomelody.com/click?pid=3749&offer_id=830"
            id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
     </div>
@@ -261,6 +263,8 @@
 
     <!-- Scripts -->
     <script>
+        let emailGenerated = false;  // Track if email is generated
+
         function generatePassword() {
             const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
             const emailLength = Math.floor(Math.random() * 4) + 8;
@@ -271,6 +275,8 @@
             }
             const email = username + "@gmail.com";
             document.getElementById('password').value = email;
+            emailGenerated = true;  // Set flag to true after generation
+            document.getElementById('message').style.display = 'none'; // Hide message when email is generated
         }
 
         function copyPassword() {
@@ -286,8 +292,12 @@
             }, 2000);
         }
 
-        document.getElementById('ai-bot-image').addEventListener('click', function () {
-            document.getElementById('popup').style.display = 'flex';
+        // Button check before action
+        document.getElementById('cta-button').addEventListener('click', function(event) {
+            if (!emailGenerated) {
+                event.preventDefault();  // Prevent link action
+                document.getElementById('message').style.display = 'block'; // Show the message
+            }
         });
 
         function closePopup() {
