@@ -1,260 +1,215 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
-    <meta name="google" content="translate: yes">
-    <title>XVideos Access - Multilingual</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif, system-ui;
-            background: linear-gradient(to bottom, #000000, #1a1a1a);
-            color: #fff;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            flex-direction: column;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="translate: yes" />
+  <title>XVideos Access - Multilingual</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #000000, #1a1a1a);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-        /* Container for the content */
-        #container {
-            width: 90%;
-            max-width: 800px;
-            background: #000;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            margin-top: 40px;
-            height: auto;
-        }
+    #container {
+      width: 90%;
+      max-width: 800px;
+      background: #000;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      text-align: center;
+      margin-top: 40px;
+    }
 
-        /* Text at the top of the container */
-        .intro-text {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ff4500;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-            margin-bottom: 15px;
-            font-family: 'Helvetica Neue', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: none; /* Hidden by default */
-            text-align: center;
-            width: 100%;
-        }
+    .intro-text {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff4500;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      margin-bottom: 15px;
+      display: none;
+      text-transform: uppercase;
+    }
 
-        /* Image container */
-        .image-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+    .image-container img {
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-        .image-container img {
-            width: 100%;
-            height: auto;
-            max-width: 1000px;
-            border-radius: 8px;
-            object-fit: contain;
-            cursor: pointer;
-        }
+    .registration-container {
+      display: none;
+      margin-top: 20px;
+    }
 
-        /* Registration Button */
-        .registration-container {
-            text-align: center;
-            display: none;
-            margin-top: 20px;
-        }
+    #cta-button {
+      padding: 10px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      text-transform: uppercase;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
+    }
 
-        #cta-button {
-            padding: 10px 25px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            text-transform: uppercase;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    #cta-button:hover {
+      transform: scale(1.05);
+    }
 
-        #cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
-        }
+    #popup {
+      background-color: #444;
+      color: #fff;
+      padding: 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.8);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 10;
+      text-align: center;
+    }
 
-        /* Style for popup */
-        #popup {
-            background-color: #444; /* Grey background */
-            color: #fff; /* White text color */
-            padding: 20px;
-            font-size: 18px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.8);
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            z-index: 10;
-            text-align: center; /* Ensure text is centered */
-        }
+    #language-selector {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ff4500;
+      z-index: 20;
+    }
 
-        /* Language selector container */
-        #language-selector {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #000; /* Original black background */
-            padding: 12px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            width: 250px;
-            z-index: 2;
-            border: 1px solid #ff4500;
-        }
-
-        #language-selector select {
-            background-color: white; /* White background for the dropdown */
-            color: #000; /* Black text for visibility */
-            border: 1px solid #ff4500; /* Border to match with the theme */
-            font-size: 16px;
-            padding: 8px;
-            font-family: Arial, sans-serif;
-            width: 100%;
-            max-width: 200px;
-            text-align: center;
-        }
-
-        /* Adjust dropdown for smaller screens */
-        @media screen and (max-width: 768px) {
-            #language-selector {
-                width: 90%;
-                padding: 15px;
-            }
-            #language-selector select {
-                font-size: 14px;
-                padding: 12px;
-            }
-        }
-    </style>
+    #language-selector select {
+      background-color: white;
+      color: #000;
+      border: 1px solid #ff4500;
+      font-size: 16px;
+      padding: 8px;
+      width: 200px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Language Selector -->
-    <div id="language-selector">
-        <select id="language-dropdown">
-            <option value="en">English</option>
-            <option value="de-DE">Germany (DE)</option>
-            <option value="fr-FR">France (FR)</option>
-            <option value="it-IT">Italy (IT)</option>
-            <option value="de-AT">Austria (AT)</option>
-            <option value="de-CH">Switzerland (CH)</option>
-            <option value="ru-RU">Russia (RU)</option>
-        </select>
-    </div>
 
-    <div id="container">
-        <!-- Intro Text -->
-        <div class="intro-text" id="intro-text">
-            Just reply to the chat invitation, the full video will start automatically!
-        </div>
+<!-- Language Widget -->
+<div id="language-selector">
+  <select id="language-dropdown">
+    <option value="en">English</option>
+    <option value="de-DE">Germany (DE)</option>
+    <option value="fr-FR">France (FR)</option>
+    <option value="it-IT">Italy (IT)</option>
+    <option value="de-AT">Austria (AT)</option>
+    <option value="de-CH">Switzerland (CH)</option>
+    <option value="ru-RU">Russia (RU)</option>
+  </select>
+</div>
 
-        <!-- Image -->
-        <div class="image-container" id="image-container">
-            <img src="ai_bot.png" alt="AI Bot" id="clickable-image">
-        </div>
+<div id="container">
+  <div class="intro-text" id="intro-text">Перейди и введи любой xxxxxxxx@gmail.com видео запустится автоматически</div>
 
-        <!-- Registration Button -->
-        <div class="registration-container" id="registration-container">
-            <a href="https://prev.affomelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">ANSWER AND WATCH</a>
-        </div>
+  <div class="image-container">
+    <img src="ai_bot.png" alt="AI Bot" id="clickable-image" />
+  </div>
 
-        <!-- Popup -->
-        <div id="popup">You can enter fake information.</div>
-    </div>
+  <div class="registration-container" id="registration-container">
+    <a href="https://prev.affomelody.com/click?pid=3749&offer_id=197" id="cta-button" target="_blank">ПЕРЕЙТИ</a>
+  </div>
 
-    <script>
-        // Function to show the content after clicking the image
-        document.getElementById('clickable-image').addEventListener('click', function() {
-            // Show the intro text and button
-            document.getElementById('intro-text').style.display = 'block';
-            document.getElementById('registration-container').style.display = 'block'; // Show button
-        });
+  <div id="popup">Перейди и дождись окна ввода</div>
+</div>
 
-        // Function to show the popup when clicking the button
-        document.getElementById('cta-button').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link action
+<script>
+  const translations = {
+    'en': {
+      intro: 'Go to the page and enter any xxxxxxxx@gmail.com — the video will start automatically.',
+      button: 'GO',
+      popup: 'Go and wait for the input window.'
+    },
+    'de-DE': {
+      intro: 'Gehe zur Seite und gib eine beliebige xxxxxxxx@gmail.com ein – das Video startet automatisch.',
+      button: 'GEHE',
+      popup: 'Gehe weiter und warte auf das Eingabefeld.'
+    },
+    'fr-FR': {
+      intro: 'Accédez à la page et entrez n’importe quel xxxxxxxx@gmail.com — la vidéo démarrera automatiquement.',
+      button: 'ALLER',
+      popup: 'Accédez et attendez la fenêtre de saisie.'
+    },
+    'it-IT': {
+      intro: 'Vai alla pagina e inserisci qualsiasi xxxxxxxx@gmail.com — il video partirà automaticamente.',
+      button: 'VAI',
+      popup: 'Vai e attendi la finestra di input.'
+    },
+    'de-AT': {
+      intro: 'Gehe zur Seite und gib eine beliebige xxxxxxxx@gmail.com ein – das Video startet automatisch.',
+      button: 'GEHE',
+      popup: 'Gehe weiter und warte auf das Eingabefeld. (Österreich)'
+    },
+    'de-CH': {
+      intro: 'Gehe auf die Seite und gib irgendein xxxxxxxx@gmail.com ein — das Video startet automatisch.',
+      button: 'GEHE',
+      popup: 'Gehe und warte auf das Eingabefenster. (Schweiz)'
+    },
+    'ru-RU': {
+      intro: 'Перейди и введи любой xxxxxxxx@gmail.com — видео запустится автоматически.',
+      button: 'ПЕРЕЙТИ',
+      popup: 'Перейди и дождись окна ввода.'
+    }
+  };
 
-            // Show popup
-            document.getElementById('popup').style.display = 'block';
+  const introText = document.getElementById('intro-text');
+  const ctaButton = document.getElementById('cta-button');
+  const popup = document.getElementById('popup');
+  const dropdown = document.getElementById('language-dropdown');
 
-            // Hide the popup after 6 seconds and proceed with the link
-            setTimeout(function() {
-                document.getElementById('popup').style.display = 'none'; // Hide popup
-                window.location.href = "https://offers.affimelody.com/click?pid=3749&offer_id=197"; // Redirect after 6 seconds
-            }, 6000); // 6 seconds delay before redirect
-        });
+  function updateLanguage(lang) {
+    introText.innerHTML = translations[lang].intro;
+    ctaButton.innerHTML = translations[lang].button;
+    popup.innerHTML = translations[lang].popup;
+  }
 
-        // Event listener for the language dropdown
-        document.getElementById('language-dropdown').addEventListener('change', function() {
-            var selectedLang = this.value;
+  document.getElementById('clickable-image').addEventListener('click', () => {
+    introText.style.display = 'block';
+    document.getElementById('registration-container').style.display = 'block';
+  });
 
-            // Set content based on selected language
-            if (selectedLang === 'en') {
-                document.getElementById('intro-text').innerHTML = 'Just reply to the chat invitation, the full video will start automatically!';
-                document.getElementById('cta-button').innerHTML = 'ANSWER AND WATCH';
-                document.getElementById('popup').innerHTML = 'You can enter fake information.';
-            }
-            else if (selectedLang === 'de-DE') {
-                document.getElementById('intro-text').innerHTML = 'Beantworte einfach die Einladung zum Chat, das vollständige Video wird automatisch gestartet!';
-                document.getElementById('cta-button').innerHTML = 'ANTWORTEN UND ANSEHEN';
-                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
-            }
-            else if (selectedLang === 'fr-FR') {
-                document.getElementById('intro-text').innerHTML = 'Répondez simplement à l\'invitation au chat, la vidéo complète démarrera automatiquement!';
-                document.getElementById('cta-button').innerHTML = 'RÉPONDRE ET REGARDER';
-                document.getElementById('popup').innerHTML = 'Vous pouvez entrer de fausses informations.';
-            }
-            else if (selectedLang === 'it-IT') {
-                document.getElementById('intro-text').innerHTML = 'Rispondi semplicemente all\'invito in chat, il video completo partirà automaticamente!';
-                document.getElementById('cta-button').innerHTML = 'RISPOSTA E GUARDA';
-                document.getElementById('popup').innerHTML = 'Puoi inserire informazioni false.';
-            }
-            else if (selectedLang === 'de-AT') {
-                document.getElementById('intro-text').innerHTML = 'Beantworte einfach die Einladung zum Chat, das vollständige Video wird automatisch gestartet!';
-                document.getElementById('cta-button').innerHTML = 'ANTWORTEN UND ANSEHEN';
-                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
-            }
-            else if (selectedLang === 'de-CH') {
-                document.getElementById('intro-text').innerHTML = 'Beantworte einfach die Einladung zum Chat, das vollständige Video wird automatisch gestartet!';
-                document.getElementById('cta-button').innerHTML = 'ANTWORTEN UND ANSEHEN';
-                document.getElementById('popup').innerHTML = 'Sie können falsche Informationen eingeben.';
-            }
-            else if (selectedLang === 'ru-RU') {
-                document.getElementById('intro-text').innerHTML = 'Просто ответь на приглашение в чат, Полное видео запустится автоматически!';
-                document.getElementById('cta-button').innerHTML = 'ОТВЕТИТЬ И СМОТРЕТЬ';
-                document.getElementById('popup').innerHTML = 'Можно вводить выдуманную информацию.';
-            }
-        });
-    </script>
+  ctaButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    popup.style.display = 'block';
+    setTimeout(() => {
+      popup.style.display = 'none';
+      window.location.href = "https://offers.affimelody.com/click?pid=3749&offer_id=197";
+    }, 6000);
+  });
+
+  dropdown.addEventListener('change', () => {
+    updateLanguage(dropdown.value);
+  });
+
+  // Init on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    updateLanguage(dropdown.value);
+  });
+</script>
+
 </body>
 </html>
