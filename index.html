@@ -1,308 +1,353 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XVideos Access</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif, system-ui;
-            background: linear-gradient(to bottom, #000000, #1a1a1a);
-            color: #fff;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            position: relative;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XVideos Access</title>
 
-        #container {
-            width: 90%;
-            max-width: 900px;
-            background: rgba(30, 30, 30, 0.95);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-            text-align: center; /* Centers text */
-            margin-top: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            height: 100%;
-        }
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif, system-ui;
+      background: linear-gradient(to bottom, #000000, #1a1a1a);
+      color: #fff;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
 
-        .heading {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ff4500;
-            text-shadow: 2px 2px 10px #000;
-            margin-bottom: 20px;
-        }
+    /* Google Translate Widget Styling */
+    .google-translate {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
 
-        .sub-heading {
-            font-size: 18px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-top: 5px;
-            margin-bottom: 20px;
-        }
+    .goog-te-combo {
+      background-color: #333;
+      color: #fff;
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+    }
 
-        .info-text {
-            font-size: 18px;
-            color: #ccc;
-            margin: 15px 0;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            -webkit-background-clip: text;
-            color: transparent;
-            font-weight: bold;
-        }
+    .goog-te-menu-value {
+      color: #fff !important;
+    }
 
-        .sub-info-text {
-            font-size: 20px;
-            color: #fff;
-            text-transform: uppercase;
-            margin: 10px 0;
-            font-weight: bold;
-        }
+    /* Optional: dark mode dropdown menu */
+    iframe.goog-te-menu-frame {
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+      border-radius: 8px;
+    }
 
-        .steps {
-            margin: 20px 0;
-            font-size: 16px;
-            color: #ddd;
-            line-height: 1.8;
-        }
+    #container {
+      width: 90%;
+      max-width: 900px;
+      background: rgba(30, 30, 30, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      text-align: center;
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
 
-        .steps span.number {
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: 18px;
-        }
+    .heading {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff4500;
+      text-shadow: 2px 2px 10px #000;
+      margin-bottom: 20px;
+    }
 
-        #cta-button {
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            text-transform: uppercase;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 20px;
-            align-self: center;
-        }
+    .sub-heading {
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
 
-        #cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
-        }
+    .info-text {
+      font-size: 18px;
+      color: #ccc;
+      margin: 15px 0;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
 
-        .password-container {
-            margin: 30px 0;
-            text-align: center;
-        }
+    .sub-info-text {
+      font-size: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      margin: 10px 0;
+      font-weight: bold;
+    }
 
-        .password-container input {
-            padding: 12px;
-            font-size: 18px;
-            width: 80%;
-            max-width: 400px;
-            background-color: #333;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 15px;
-        }
+    .steps {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #ddd;
+      line-height: 1.8;
+    }
 
-        .password-container button {
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            background: linear-gradient(45deg, #ff4500, #ff6347);
-            text-transform: uppercase;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 10px;
-        }
+    .steps span.number {
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 18px;
+    }
 
-        .password-container button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
-        }
+    #cta-button {
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      text-transform: uppercase;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;
+      align-self: center;
+    }
 
-        .notification {
-            display: none;
-            color: #28a745;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+    #cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
+    }
 
-        .message {
-            display: none;
-            color: red; /* Red color */
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 18px;
-            text-transform: uppercase; /* Uppercase text */
-        }
+    .password-container {
+      margin: 30px 0;
+      text-align: center;
+    }
 
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-            cursor: pointer;
-        }
+    .password-container input {
+      padding: 12px;
+      font-size: 18px;
+      width: 80%;
+      max-width: 400px;
+      background-color: #333;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
 
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+    .password-container button {
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      text-transform: uppercase;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 10px;
+    }
 
-        .popup-content {
-            background: #fff;
-            color: #000;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
+    .password-container button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
+    }
 
-        .popup button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            background: #ff4500;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    .notification {
+      display: none;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-        .popup button:hover {
-            background: #ff6347;
-        }
-    </style>
+    .message {
+      display: none;
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .popup button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      background: #ff4500;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background: #ff6347;
+    }
+  </style>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ru,de,fr,it,es,pt,nl,pl,sv,da,ms,ko,ja,zh-CN,zh-TW',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript"
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
+
 <body>
-    <div id="container">
-        <!-- AI Bot Image -->
-        <div class="image-container">
-            <img src="ai_bot.png" alt="AI Bot" id="ai-bot-image" />
-        </div>
+  <!-- Google Translate Dropdown -->
+  <div id="google_translate_element" class="google-translate"></div>
 
-        <!-- ENJOY 490000+ VIDEOS IN VARIOUS CATEGORIES -->
-        <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
-
-        <!-- AI Bot Full Image -->
-        <div class="image-container">
-            <img src="ai_botfull.png" alt="AI Bot Full" />
-        </div>
-
-        <!-- Email Generator Section -->
-        <div class="password-container">
-            <input type="text" id="password" readonly placeholder="example@gmail.com" />
-            <br>
-            <button onclick="generatePassword()" id="generate-password">GET EMAIL</button>
-            <button onclick="copyPassword()" id="copy-password">COPY EMAIL</button>
-            <div class="notification" id="notification">Email copied!</div>
-        </div>
-
-        <!-- Unlock Text -->
-        <div class="info-text">Unlock access to the XVideos section in just 2 simple steps — it's quick!</div>
-        <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
-
-        <!-- Steps -->
-        <div class="steps">
-            <p><span class="number">1.</span> Paste the received email</p>
-            <p><span class="number">2.</span> Enter any password</p>
-        </div>
-
-        <!-- AI Bot End Image -->
-        <div class="image-container">
-            <img src="ai_botlend.png" alt="AI Bot End" />
-        </div>
-
-        <!-- Message if email isn't received -->
-        <div id="message" class="message">
-            <p>Please get and copy the email first!</p>
-        </div>
-
-        <!-- Call to Action Button -->
-        <a href="https://prev.affomelody.com/click?pid=3749&offer_id=830"
-           id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
+  <div id="container">
+    <div class="image-container">
+      <img src="ai_bot.png" alt="AI Bot" id="ai-bot-image" />
     </div>
 
-    <!-- Popup -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <p id="popup-message">UNLOCK REQUIRED</p>
-            <button onclick="closePopup()">PROCEED</button>
-        </div>
+    <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
+
+    <div class="image-container">
+      <img src="ai_botfull.png" alt="AI Bot Full" />
     </div>
 
-    <!-- Scripts -->
-    <script>
-        let emailGenerated = false;  // Track if email is received
+    <div class="password-container">
+      <input type="text" id="password" readonly placeholder="example@gmail.com" />
+      <br>
+      <button onclick="generatePassword()" id="generate-password">GET ADDRESS</button>
+      <button onclick="copyPassword()" id="copy-password">COPY ADDRESS</button>
+      <div class="notification" id="notification">Address copied!</div>
+    </div>
 
-        function generatePassword() {
-            const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            const emailLength = Math.floor(Math.random() * 4) + 8;
-            let username = "";
-            for (let i = 0; i < emailLength; i++) {
-                const randomIndex = Math.floor(Math.random() * chars.length);
-                username += chars[randomIndex];
-            }
-            const email = username + "@gmail.com";
-            document.getElementById('password').value = email;
-            emailGenerated = true;  // Set flag to true after receiving email
-            document.getElementById('message').style.display = 'none'; // Hide message when email is received
-        }
+    <div class="info-text">Unlock access to the XVideos section in just 2 simple steps — it's quick!</div>
+    <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
 
-        function copyPassword() {
-            const passwordField = document.getElementById('password');
-            passwordField.select();
-            document.execCommand('copy');
+    <div class="steps">
+      <p><span class="number">1.</span> Answer a few questions</p>
+      <p><span class="number">2.</span> Paste the received @gmail</p>
+    </div>
 
-            const notification = document.getElementById('notification');
-            notification.style.display = 'block';
+    <div class="image-container">
+      <img src="ai_botlend.png" alt="AI Bot End" />
+    </div>
 
-            setTimeout(function () {
-                notification.style.display = 'none';
-            }, 2000);
-        }
+    <div id="message" class="message">
+      <p>Please get and copy the address first!</p>
+    </div>
 
-        // Button check before action
-        document.getElementById('cta-button').addEventListener('click', function(event) {
-            if (!emailGenerated) {
-                event.preventDefault();  // Prevent link action
-                document.getElementById('message').style.display = 'block'; // Show the message
-            }
-        });
+    <a href="https://prev.affomelody.com/click?pid=3749&offer_id=594"
+       id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
+  </div>
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-    </script>
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p id="popup-message">SEE DESCRIPTION</p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    let emailGenerated = false;
+    let emailCopied = false;
+
+    document.getElementById('ai-bot-image').addEventListener('click', function () {
+      document.getElementById('popup').style.display = 'flex';
+    });
+
+    function generatePassword() {
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+      const emailLength = Math.floor(Math.random() * 4) + 8;
+      let username = "";
+      for (let i = 0; i < emailLength; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        username += chars[randomIndex];
+      }
+      const email = username + "@gmail.com";
+      document.getElementById('password').value = email;
+      emailGenerated = true;
+      emailCopied = false;
+      document.getElementById('message').style.display = 'none';
+    }
+
+    function copyPassword() {
+      const passwordField = document.getElementById('password');
+      passwordField.select();
+      document.execCommand('copy');
+
+      emailCopied = true;
+      const notification = document.getElementById('notification');
+      notification.style.display = 'block';
+
+      setTimeout(function () {
+        notification.style.display = 'none';
+      }, 2000);
+    }
+
+    document.getElementById('cta-button').addEventListener('click', function (event) {
+      if (!emailGenerated || !emailCopied) {
+        event.preventDefault();
+        document.getElementById('message').style.display = 'block';
+      }
+    });
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
