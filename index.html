@@ -11,8 +11,8 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      font-family: Arial, sans-serif, system-ui;
-      background: linear-gradient(to bottom, #000000, #1a1a1a);
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #020024, #090979, #00d4ff);
       color: #fff;
       overflow-x: hidden;
       display: flex;
@@ -189,15 +189,65 @@
       box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
     }
 
-    /* Стиль для сообщения */
-    #click-message {
+    /* Модальное окно */
+    .modal {
       display: none;
-      font-size: 18px;
-      color: #ff6347;
-      font-weight: bold;
-      margin-top: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
+    .modal-content {
+      background: linear-gradient(45deg, #4e54c8, #8f94fb);
+      padding: 30px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      width: 60%;  /* Уменьшаем ширину модального окна */
+      max-width: 400px;  /* Уменьшаем максимальную ширину */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      word-wrap: break-word; /* Добавляем разрыв слов */
+      animation: zoomIn 0.5s ease-in-out;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background-color: #ff4500;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background-color: #ff6347;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
   </style>
 
   <!-- Google Translate -->
@@ -218,8 +268,6 @@
   <div id="google_translate_element" class="google-translate"></div>
 
   <div id="container">
-
-    <!-- Добавляем изображение ai_bot.png в верхнюю часть контейнера -->
     <div class="image-container">
       <img src="ai_bot.png" alt="AI Bot" id="ai-bot-image" />
     </div>
@@ -227,7 +275,7 @@
     <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
 
     <div class="image-container">
-      <img src="ai_botfull.png" alt="AI Bot Full" id="ai-bot-image" />
+      <img src="ai_botfull.png" alt="AI Bot Full" id="ai-bot-full-image" />
     </div>
 
     <div class="info-text">Unlock access to the XVideos section in just 3 simple steps — it's quick!</div>
@@ -240,7 +288,7 @@
     </div>
 
     <div class="image-container">
-      <img src="ai_botlend.png" alt="AI Bot End" />
+      <img src="ai_botlend.png" alt="AI Bot End" id="ai-bot-end-image" />
     </div>
 
     <div class="password-container">
@@ -253,18 +301,21 @@
 
     <div class="access-info-text">ACCESS WILL BE GRANTED AUTOMATICALLY</div>
 
+    <!-- Сообщение над кнопкой -->
     <div id="message" class="message">
       <p>Please get and copy the address first!</p>
     </div>
 
     <a href="https://avzqa.imitrkn.net/?utm_source=abb97e0f8fbdaabe&s1=48854&s2=220406"
        id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
+  </div>
 
-    <!-- Сообщение при клике на ai_bot.png -->
-    <div id="click-message">
-      <p>You've clicked on the AI Bot!</p>
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>NEED UNLOCKING</p>
+      <button class="close-btn" onclick="closeModal()">UNLOCK</button>
     </div>
-
   </div>
 
   <script>
@@ -309,10 +360,15 @@
       }
     });
 
-    // Сообщение при клике на изображение
+    // Открытие модального окна при клике на изображение
     document.getElementById('ai-bot-image').addEventListener('click', function () {
-      document.getElementById('click-message').style.display = 'block';
+      document.getElementById('modal').style.display = 'flex';
     });
+
+    // Закрытие модального окна
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
   </script>
 </body>
 </html>
