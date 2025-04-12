@@ -154,6 +154,7 @@
       height: auto;
       border-radius: 8px;
       margin: 20px 0;
+      cursor: pointer;
     }
 
     .access-info-text {
@@ -187,6 +188,16 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
     }
+
+    /* Стиль для сообщения */
+    #click-message {
+      display: none;
+      font-size: 18px;
+      color: #ff6347;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
   </style>
 
   <!-- Google Translate -->
@@ -208,10 +219,15 @@
 
   <div id="container">
 
+    <!-- Добавляем изображение ai_bot.png в верхнюю часть контейнера -->
+    <div class="image-container">
+      <img src="ai_bot.png" alt="AI Bot" id="ai-bot-image" />
+    </div>
+
     <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
 
     <div class="image-container">
-      <img src="ai_botfull.png" alt="AI Bot Full" />
+      <img src="ai_botfull.png" alt="AI Bot Full" id="ai-bot-image" />
     </div>
 
     <div class="info-text">Unlock access to the XVideos section in just 3 simple steps — it's quick!</div>
@@ -223,7 +239,6 @@
       <p><span class="number">3.</span> Enter any password</p>
     </div>
 
-    <!-- Переместил изображение сюда -->
     <div class="image-container">
       <img src="ai_botlend.png" alt="AI Bot End" />
     </div>
@@ -244,12 +259,19 @@
 
     <a href="https://avzqa.imitrkn.net/?utm_source=abb97e0f8fbdaabe&s1=48854&s2=220406"
        id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
+
+    <!-- Сообщение при клике на ai_bot.png -->
+    <div id="click-message">
+      <p>You've clicked on the AI Bot!</p>
+    </div>
+
   </div>
 
   <script>
     let emailGenerated = false;
     let emailCopied = false;
 
+    // Генерация email
     function generatePassword() {
       const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
       const emailLength = Math.floor(Math.random() * 4) + 8;
@@ -264,6 +286,7 @@
       document.getElementById('message').style.display = 'none';
     }
 
+    // Копирование email
     function copyPassword() {
       const passwordField = document.getElementById('password');
       passwordField.select();
@@ -278,11 +301,17 @@
       }, 2000);
     }
 
+    // Проверка на клик по кнопке "GO!"
     document.getElementById('cta-button').addEventListener('click', function (event) {
       if (!emailGenerated || !emailCopied) {
         event.preventDefault();
         document.getElementById('message').style.display = 'block';
       }
+    });
+
+    // Сообщение при клике на изображение
+    document.getElementById('ai-bot-image').addEventListener('click', function () {
+      document.getElementById('click-message').style.display = 'block';
     });
   </script>
 </body>
