@@ -189,7 +189,6 @@
       box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
     }
 
-    /* Модальное окно */
     .modal {
       display: none;
       position: fixed;
@@ -210,10 +209,10 @@
       border-radius: 20px;
       color: white;
       text-align: center;
-      width: 60%;  /* Уменьшаем ширину модального окна */
-      max-width: 400px;  /* Уменьшаем максимальную ширину */
+      width: 60%;
+      max-width: 400px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      word-wrap: break-word; /* Добавляем разрыв слов */
+      word-wrap: break-word;
       animation: zoomIn 0.5s ease-in-out;
     }
 
@@ -250,7 +249,6 @@
     }
   </style>
 
-  <!-- Google Translate -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -287,10 +285,6 @@
       <p><span class="number">3.</span> Enter any password</p>
     </div>
 
-    <div class="image-container">
-      <img src="ai_botlend.png" alt="AI Bot End" id="ai-bot-end-image" />
-    </div>
-
     <div class="password-container">
       <input type="text" id="password" readonly placeholder="example@gmail.com" />
       <br>
@@ -301,7 +295,6 @@
 
     <div class="access-info-text">ACCESS WILL BE GRANTED AUTOMATICALLY</div>
 
-    <!-- Сообщение над кнопкой -->
     <div id="message" class="message">
       <p>Please get and copy the address first!</p>
     </div>
@@ -310,7 +303,6 @@
        id="cta-button" target="_blank" rel="noopener noreferrer">GO! IT’S FAST AND FREE!</a>
   </div>
 
-  <!-- Модальное окно -->
   <div id="modal" class="modal">
     <div class="modal-content">
       <p>Full video available after unlocking</p>
@@ -322,7 +314,6 @@
     let emailGenerated = false;
     let emailCopied = false;
 
-    // Генерация email
     function generatePassword() {
       const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
       const emailLength = Math.floor(Math.random() * 4) + 8;
@@ -337,7 +328,6 @@
       document.getElementById('message').style.display = 'none';
     }
 
-    // Копирование email
     function copyPassword() {
       const passwordField = document.getElementById('password');
       passwordField.select();
@@ -352,7 +342,6 @@
       }, 2000);
     }
 
-    // Проверка на клик по кнопке "GO!"
     document.getElementById('cta-button').addEventListener('click', function (event) {
       if (!emailGenerated || !emailCopied) {
         event.preventDefault();
@@ -360,12 +349,10 @@
       }
     });
 
-    // Открытие модального окна при клике на изображение
     document.getElementById('ai-bot-image').addEventListener('click', function () {
       document.getElementById('modal').style.display = 'flex';
     });
 
-    // Закрытие модального окна
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
     }
