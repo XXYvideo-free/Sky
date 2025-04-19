@@ -149,14 +149,6 @@
       text-transform: uppercase;
     }
 
-    .image-container img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 20px 0;
-      cursor: pointer;
-    }
-
     .access-info-text {
       font-size: 20px;
       font-weight: bold;
@@ -184,68 +176,20 @@
       align-self: center;
     }
 
-    #cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
+    /* Стили для изображения внутри ссылки */
+    #cta-button img {
+      max-width: 100%;
+      height: auto;
+      border: none; /* Убираем рамку */
+      outline: none; /* Убираем выделение */
+      background: rgba(30, 30, 30, 0.95); /* Устанавливаем фон как у контейнера */
+      display: block; /* Убираем возможное выделение через inline-block */
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .modal-content {
-      background: linear-gradient(45deg, #4e54c8, #8f94fb);
-      padding: 30px;
-      border-radius: 20px;
-      color: white;
-      text-align: center;
-      width: 60%;
-      max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      word-wrap: break-word;
-      animation: zoomIn 0.5s ease-in-out;
-    }
-
-    .modal-content p {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .close-btn {
-      background-color: #ff4500;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .close-btn:hover {
-      background-color: #ff6347;
-      transform: scale(1.1);
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes zoomIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    /* Когда мы наводим на изображение, ничего не меняется */
+    #cta-button img:hover {
+      transform: none;
+      box-shadow: none;
     }
   </style>
 
@@ -266,22 +210,11 @@
   <div id="google_translate_element" class="google-translate"></div>
 
   <div id="container">
-    <div class="image-container">
-      <img src="ai_bot.png" alt="AI Bot" id="ai-bot-image" />
-    </div>
+    <div class="sub-heading">GET ACCESS TO 490,000+ XVIDEOS IN VARIOUS CATEGORIES</div>
 
-    <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
-
-    <div class="image-container">
-      <img src="ai_botfull.png" alt="AI Bot Full" id="ai-bot-full-image" />
-    </div>
-
-    <div class="info-text"> Unlock access to XVideos — it's quick!</div>
     <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
 
-    <div class="steps">
-      <p><span class="number"></span> Paste the received @gmail</p>
-    </div>
+    <div class="access-info-text">REDIRECT AND ACCESS WILL BE GRANTED AUTOMATICALLY</div>
 
     <div class="password-container">
       <input type="text" id="password" readonly placeholder="example@gmail.com" />
@@ -291,24 +224,20 @@
       <div class="notification" id="notification">Address copied!</div>
     </div>
 
-    <div class="access-info-text">REDIRECT AND ACCESS WILL BE GRANTED AUTOMATICALLY</div>
+    <!-- Перемещен текст "Paste the received @gmail" под генератор -->
+    <div class="steps">
+      <p><span class="number"></span> Paste the received @gmail</p>
+    </div>
 
     <div id="message" class="message">
       <p>Please get and copy the address first!</p>
     </div>
 
-    <!-- Here is the updated link with the image -->
+    <!-- Кнопка-ссылка -->
     <a href="https://prev.affomelody.com/click?pid=3749&offer_id=197"
        id="cta-button" target="_blank" rel="noopener noreferrer">
-      <img src="ip.png" alt="Go to link" style="width: auto; height: auto; border-radius: 8px; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <img src="ip.png" alt="Go to link">
     </a>
-  </div>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <p>Full video available after unlocking</p>
-      <button class="close-btn" onclick="closeModal()">UNLOCK</button>
-    </div>
   </div>
 
   <script>
@@ -349,14 +278,6 @@
         document.getElementById('message').style.display = 'block';
       }
     });
-
-    document.getElementById('ai-bot-image').addEventListener('click', function () {
-      document.getElementById('modal').style.display = 'flex';
-    });
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
   </script>
 </body>
 </html>
