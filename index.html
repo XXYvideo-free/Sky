@@ -65,7 +65,6 @@
 
     .info-text {
       font-size: 18px;
-      color: #ccc;
       margin: 15px 0;
       background: linear-gradient(45deg, #ff4500, #ff6347);
       -webkit-background-clip: text;
@@ -160,36 +159,18 @@
       text-transform: uppercase;
     }
 
-    #cta-button {
-      padding: 15px 40px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      background: linear-gradient(45deg, #ff4500, #ff6347);
-      text-transform: uppercase;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-top: 20px;
-      align-self: center;
+    .cta-image {
+      margin-top: 30px;
     }
 
-    /* Стили для изображения внутри ссылки */
-    #cta-button img {
+    .cta-image img {
+      width: auto;
       max-width: 100%;
       height: auto;
-      border: none; /* Убираем рамку */
-      outline: none; /* Убираем выделение */
-      background: rgba(30, 30, 30, 0.95); /* Устанавливаем фон как у контейнера */
-      display: block; /* Убираем возможное выделение через inline-block */
-    }
-
-    /* Когда мы наводим на изображение, ничего не меняется */
-    #cta-button img:hover {
-      transform: none;
+      border-radius: 8px;
+      background: rgba(30, 30, 30, 0.95);
       box-shadow: none;
+      border: none;
     }
   </style>
 
@@ -210,11 +191,10 @@
   <div id="google_translate_element" class="google-translate"></div>
 
   <div id="container">
-    <div class="sub-heading">GET ACCESS TO 490,000+ XVIDEOS IN VARIOUS CATEGORIES</div>
 
     <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
 
-    <div class="access-info-text">REDIRECT AND ACCESS WILL BE GRANTED AUTOMATICALLY</div>
+    <div class="access-info-text">YOU WILL BE AUTOMATICALLY REDIRECTED TO THE FULL VIDEO</div>
 
     <div class="password-container">
       <input type="text" id="password" readonly placeholder="example@gmail.com" />
@@ -224,20 +204,20 @@
       <div class="notification" id="notification">Address copied!</div>
     </div>
 
-    <!-- Перемещен текст "Paste the received @gmail" под генератор -->
     <div class="steps">
-      <p><span class="number"></span> Paste the received @gmail</p>
+      <p><span class="number"></span>Click on the window below and wait for the same one to appear to insert this @gmail.</p>
     </div>
 
     <div id="message" class="message">
       <p>Please get and copy the address first!</p>
     </div>
 
-    <!-- Кнопка-ссылка -->
-    <a href="https://prev.affomelody.com/click?pid=3749&offer_id=197"
-       id="cta-button" target="_blank" rel="noopener noreferrer">
-      <img src="ip.png" alt="Go to link">
-    </a>
+    <!-- КАРТИНКА С ССЫЛКОЙ -->
+    <div class="cta-image">
+      <a href="https://prev.affomelody.com/click?pid=3749&offer_id=197" target="_blank" rel="noopener noreferrer">
+        <img src="ip.png" alt="Access Link">
+      </a>
+    </div>
   </div>
 
   <script>
@@ -271,13 +251,6 @@
         notification.style.display = 'none';
       }, 2000);
     }
-
-    document.getElementById('cta-button').addEventListener('click', function (event) {
-      if (!emailGenerated || !emailCopied) {
-        event.preventDefault();
-        document.getElementById('message').style.display = 'block';
-      }
-    });
   </script>
 </body>
 </html>
